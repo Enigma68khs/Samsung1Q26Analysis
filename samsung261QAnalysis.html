@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>삼성전자 1Q26 실적 투자자 보고</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#070b16;--slide:#0b1020;--surface:#111a30;--surface2:#16223d;--card:rgba(255,255,255,.055);
+      --border:rgba(255,255,255,.12);--text:#f4f7fb;--muted:#8fa0b8;--muted2:#b7c2d5;
+      --blue:#1f6bff;--cyan:#5ce1e6;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--purple:#8b5cf6;
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+    }
+    html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Noto Sans KR','Inter',sans-serif;-webkit-font-smoothing:antialiased}
+    .deck{position:relative;width:100vw;height:100vh;background:var(--bg);overflow:hidden}
+    .slide{position:absolute;inset:0;padding:52px 70px;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(70px) scale(.985);transition:.55s cubic-bezier(.22,.61,.36,1);background:radial-gradient(circle at 82% 12%,rgba(31,107,255,.18),transparent 36%),radial-gradient(circle at 12% 78%,rgba(92,225,230,.08),transparent 34%),var(--slide);overflow:hidden}
+    .slide.active{opacity:1;transform:translateX(0) scale(1);z-index:2}.slide.prev{opacity:0;transform:translateX(-70px) scale(.985)}
+    .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 30%,rgba(255,255,255,.02));pointer-events:none}
+    .content{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto}.wide{max-width:1300px}.center{text-align:center}.row{display:flex;gap:24px}.grid{display:grid;gap:20px}.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}
+    .label{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;margin-bottom:18px}.label::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+    h1{font-size:clamp(48px,6.4vw,82px);line-height:1.05;letter-spacing:-.055em;font-weight:900}h2{font-size:clamp(34px,4.2vw,58px);line-height:1.12;letter-spacing:-.045em;font-weight:900;margin-bottom:14px}h3{font-size:22px;font-weight:800;letter-spacing:-.02em}.subtitle{font-size:20px;line-height:1.72;color:var(--muted2)}.small{font-size:13px;color:var(--muted);line-height:1.7}.note{font-size:12px;color:#7f8da8;margin-top:18px}
+    .hero-title{background:linear-gradient(135deg,#fff 0%,#d9e9ff 45%,#5ce1e6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero-box{margin-top:34px;padding:18px 24px;border:1px solid rgba(92,225,230,.28);background:rgba(92,225,230,.06);border-radius:20px;color:#dffcff;font-size:22px;font-weight:800;display:inline-block}
+    .card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.074),rgba(255,255,255,.035));border:1px solid var(--border);border-radius:24px;padding:24px;box-shadow:var(--shadow);overflow:hidden}.card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 100% 0,rgba(31,107,255,.10),transparent 38%);pointer-events:none}.card>*{position:relative;z-index:1}
+    .kpi{min-height:145px}.kpi .name{font-size:14px;color:var(--muted);font-weight:700;margin-bottom:12px}.kpi .value{font-size:40px;line-height:1;font-weight:900;letter-spacing:-.045em}.kpi .unit{font-size:18px;color:var(--muted2);font-weight:700;margin-left:4px}.kpi .delta{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;background:rgba(34,197,94,.12);color:#86efac;border:1px solid rgba(34,197,94,.25)}.badge.blue{background:rgba(31,107,255,.14);color:#bad2ff;border-color:rgba(31,107,255,.28)}.badge.red{background:rgba(239,68,68,.12);color:#fca5a5;border-color:rgba(239,68,68,.25)}.badge.yellow{background:rgba(245,158,11,.12);color:#fde68a;border-color:rgba(245,158,11,.25)}
+    .mega-number{font-size:84px;font-weight:900;letter-spacing:-.06em;line-height:.95}.accent{color:var(--cyan)}.blue{color:#76a7ff}.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.purple{color:var(--purple)}
+    .bar-chart{display:flex;align-items:flex-end;gap:24px;height:320px;padding:18px 10px 8px;border-left:1px solid var(--border);border-bottom:1px solid var(--border)}.bar-group{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:8px;height:100%;position:relative}.bar{width:42px;border-radius:12px 12px 0 0;background:linear-gradient(180deg,var(--blue),rgba(31,107,255,.45));position:relative;min-height:8px}.bar.profit{background:linear-gradient(180deg,var(--cyan),rgba(92,225,230,.38))}.bar-label{position:absolute;bottom:-34px;width:100%;text-align:center;color:var(--muted);font-size:13px;font-weight:800}.bar-val{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:900;color:var(--text);white-space:nowrap}
+    .donut-wrap{display:flex;align-items:center;justify-content:center}.donut{width:260px;height:260px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--cyan) 0 var(--p),rgba(255,255,255,.12) var(--p) 100%)}.donut::after{content:"";position:absolute;inset:34px;border-radius:50%;background:#0e1528;border:1px solid rgba(255,255,255,.08)}.donut .inner{position:relative;z-index:1;text-align:center}.donut .pct{font-size:52px;font-weight:900;letter-spacing:-.04em}.donut .txt{font-size:13px;color:var(--muted);font-weight:800}
+    .gauge{width:340px;height:180px;position:relative;overflow:hidden}.gauge-bg,.gauge-fill{position:absolute;left:0;top:0;width:340px;height:340px;border-radius:50%;border:34px solid rgba(255,255,255,.12);border-bottom-color:transparent;border-left-color:transparent;transform:rotate(-135deg)}.gauge-fill{border-top-color:var(--cyan);border-right-color:var(--cyan);clip-path:polygon(50% 50%,100% 0,100% 100%,0 100%,0 0);filter:drop-shadow(0 0 18px rgba(92,225,230,.45))}.gauge-center{position:absolute;left:0;right:0;bottom:0;text-align:center}.gauge-center .num{font-size:58px;font-weight:900;letter-spacing:-.05em}.gauge-center .cap{color:var(--muted);font-size:13px;font-weight:800}
+    .table{width:100%;border-collapse:collapse;border-radius:20px;overflow:hidden;border:1px solid var(--border)}.table th{background:rgba(31,107,255,.18);color:#bcd2ff;text-align:left;padding:14px 16px;font-size:13px;letter-spacing:.04em}.table td{padding:14px 16px;border-top:1px solid var(--border);font-size:15px}.table .right{text-align:right;font-weight:800}.heat{border-radius:999px;padding:6px 10px;font-weight:900;font-size:12px;display:inline-block}.heat.hot{background:rgba(34,197,94,.16);color:#86efac}.heat.mid{background:rgba(245,158,11,.16);color:#fde68a}.heat.low{background:rgba(239,68,68,.13);color:#fca5a5}
+    .timeline{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}.timeline::before{content:"";position:absolute;left:11%;right:11%;top:34px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:.8}.time-card{text-align:center;position:relative}.time-dot{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;margin:0 auto 16px;font-size:22px;font-weight:900;box-shadow:0 0 24px rgba(92,225,230,.25)}
+    .waterfall{height:300px;display:flex;align-items:flex-end;gap:18px;padding:20px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)}.wf-col{flex:1;text-align:center;position:relative}.wf-bar{margin:0 auto;width:78%;border-radius:10px 10px 0 0;background:linear-gradient(180deg,var(--blue),rgba(31,107,255,.4));min-height:20px;position:relative}.wf-bar.add{background:linear-gradient(180deg,var(--green),rgba(34,197,94,.35))}.wf-bar.fx{background:linear-gradient(180deg,var(--yellow),rgba(245,158,11,.35))}.wf-bar.final{background:linear-gradient(180deg,var(--cyan),rgba(92,225,230,.35))}.wf-val{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-weight:900;font-size:13px;white-space:nowrap}.wf-lab{font-size:12px;color:var(--muted);font-weight:800;margin-top:10px;line-height:1.35}
+    .matrix{display:grid;grid-template-columns:1fr 1fr;gap:22px}.list{display:flex;flex-direction:column;gap:12px}.item{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid var(--border)}.dot{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:13px;font-weight:900}.dot.g{background:rgba(34,197,94,.18);color:#86efac}.dot.r{background:rgba(239,68,68,.18);color:#fca5a5}.dot.b{background:rgba(31,107,255,.18);color:#bad2ff}
+    .nav{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:12px;padding:9px 16px;border-radius:999px;background:rgba(10,16,32,.72);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px)}.nav button,.menu button{border:0;background:rgba(255,255,255,.065);color:var(--text);border-radius:999px;width:34px;height:34px;cursor:pointer;font-weight:900}.nav button:hover,.menu button:hover{background:rgba(255,255,255,.13)}.counter{font-size:13px;color:var(--muted2);font-weight:800;min-width:58px;text-align:center}.progress{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:30;transition:.35s ease}.menu{position:fixed;right:20px;top:20px;z-index:25;display:flex;gap:8px}.menu button{width:auto;padding:0 14px;border-radius:14px;font-size:13px}
+    .footer{position:absolute;left:70px;right:70px;bottom:56px;z-index:3;display:flex;justify-content:space-between;color:#687794;font-size:11px;font-weight:700}.logo-text{letter-spacing:.08em;text-transform:uppercase}.source{font-size:10px;color:#63728e}.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:22px 0}.pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.bigquote{font-size:30px;line-height:1.45;font-weight:900;letter-spacing:-.035em;color:#eaf7ff}.chart-legend{display:flex;gap:14px;align-items:center;margin-top:8px;color:var(--muted);font-size:12px;font-weight:800}.legend-dot{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px}.l-blue{background:var(--blue)}.l-cyan{background:var(--cyan)}
+    .print-all{display:none}
+    @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}.slide.active .anim{animation:up .65s ease both}.d1{animation-delay:.08s!important}.d2{animation-delay:.16s!important}.d3{animation-delay:.24s!important}.d4{animation-delay:.32s!important}
+    @media(max-width:900px){.slide{padding:36px 26px}.grid-4,.grid-3,.grid-2,.matrix{grid-template-columns:1fr}.row{flex-direction:column}.bar-chart{height:240px}.footer{left:26px;right:26px}.mega-number{font-size:58px}.menu{display:none}}
+    @media print{html,body{overflow:visible;height:auto}.deck{height:auto;overflow:visible}.slide{position:relative;opacity:1!important;transform:none!important;height:100vh;page-break-after:always}.nav,.menu,.progress{display:none!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="menu"><button onclick="downloadPNG()">PNG 저장</button><button onclick="window.print()">PDF/인쇄</button></div>
+  <nav class="nav"><button onclick="prevSlide()">‹</button><span class="counter" id="counter">1 / 13</span><button onclick="nextSlide()">›</button></nav>
+  <main class="deck" id="deck">
+
+    <section class="slide active">
+      <div class="content center">
+        <div class="label anim">Investor Briefing</div>
+        <h1 class="hero-title anim d1">삼성전자 1Q26 실적<br/>AI 메모리 사이클의 본격화</h1>
+        <p class="subtitle anim d2" style="margin-top:24px">4월 30일 실적 발표 기반 투자자 보고용 분석</p>
+        <div class="grid grid-3 anim d3" style="margin-top:42px">
+          <div class="card kpi"><div class="name">매출</div><div class="value">133.9<span class="unit">조원</span></div><div class="delta"><span class="badge">QoQ +43%</span><span class="badge">YoY +69%</span></div></div>
+          <div class="card kpi"><div class="name">영업이익</div><div class="value accent">57.2<span class="unit">조원</span></div><div class="delta"><span class="badge">QoQ +185%</span><span class="badge">YoY +756%</span></div></div>
+          <div class="card kpi"><div class="name">영업이익률</div><div class="value">42.8<span class="unit">%</span></div><div class="delta"><span class="badge blue">+21.4%p QoQ</span></div></div>
+        </div>
+        <div class="hero-box anim d4">핵심 메시지: DS가 전체 이익의 약 94%를 창출한 분기</div>
+      </div>
+      <div class="footer"><span class="logo-text">Samsung Electronics 1Q26</span><span>Investor Presentation Draft</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">01 Snapshot</div>
+        <h2 class="anim d1">1Q26 실적 Snapshot</h2>
+        <p class="subtitle anim d2">외형 성장과 이익 성장이 동시에 나타난 강한 실적 구간입니다.</p>
+        <div class="grid grid-4 anim d3" style="margin-top:30px">
+          <div class="card kpi"><div class="name">Revenue</div><div class="value">133.9<span class="unit">조원</span></div><div class="delta"><span class="badge">+43% QoQ</span><span class="badge">+69% YoY</span></div></div>
+          <div class="card kpi"><div class="name">Operating Profit</div><div class="value accent">57.2<span class="unit">조원</span></div><div class="delta"><span class="badge">+185% QoQ</span><span class="badge">+756% YoY</span></div></div>
+          <div class="card kpi"><div class="name">OP Margin</div><div class="value">42.8<span class="unit">%</span></div><div class="delta"><span class="badge blue">High Margin Inflection</span></div></div>
+          <div class="card kpi"><div class="name">R&D Investment</div><div class="value">11.3<span class="unit">조원</span></div><div class="delta"><span class="badge">+26% YoY</span><span class="badge blue">8.4% of Sales</span></div></div>
+        </div>
+        <div class="card anim d4" style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:18px">
+          <div><h3>EPS</h3><p class="small">보통주 7,123원 / 우선주 7,124원</p></div>
+          <div class="bigquote">“좋은 실적”을 넘어 “이익 구조 전환”을 확인</div>
+        </div>
+      </div>
+      <div class="footer"><span>Source: Samsung IR / Earnings Release</span><span>Unit: KRW trillion unless noted</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">02 Trend</div>
+        <h2 class="anim d1">실적은 얼마나 빠르게 개선되었는가</h2>
+        <p class="subtitle anim d2">매출보다 영업이익 증가 기울기가 훨씬 가파릅니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:28px;align-items:center">
+          <div class="card">
+            <div class="bar-chart" aria-label="3개 분기 매출과 영업이익 비교">
+              <div class="bar-group"><div class="bar" style="height:59%"><span class="bar-val">79.2</span></div><div class="bar profit" style="height:12%"><span class="bar-val">6.7</span></div><div class="bar-label">1Q25</div></div>
+              <div class="bar-group"><div class="bar" style="height:70%"><span class="bar-val">93.6</span></div><div class="bar profit" style="height:35%"><span class="bar-val">20.1</span></div><div class="bar-label">4Q25</div></div>
+              <div class="bar-group"><div class="bar" style="height:100%"><span class="bar-val">133.9</span></div><div class="bar profit" style="height:100%"><span class="bar-val">57.2</span></div><div class="bar-label">1Q26</div></div>
+            </div>
+            <div class="chart-legend"><span><i class="legend-dot l-blue"></i>매출</span><span><i class="legend-dot l-cyan"></i>영업이익</span></div>
+          </div>
+          <div class="card">
+            <div class="mega-number accent">8.5x</div>
+            <h3 style="margin-top:10px">영업이익 YoY 증가 배율</h3>
+            <div class="divider"></div>
+            <div class="list">
+              <div class="item"><span class="dot b">1</span><div><b>매출 회복</b><p class="small">79.2조원 → 133.9조원</p></div></div>
+              <div class="item"><span class="dot g">2</span><div><b>이익 레버리지</b><p class="small">6.7조원 → 57.2조원</p></div></div>
+              <div class="item"><span class="dot b">3</span><div><b>믹스 개선</b><p class="small">AI향 고부가 메모리 비중 확대</p></div></div>
+            </div>
+          </div>
+        </div>
+        <p class="note anim d4">※ 1Q25, 4Q25 수치는 제시된 YoY/QoQ 증감률을 기준으로 역산한 참고값입니다.</p>
+      </div>
+      <div class="footer"><span>Trend View</span><span>Revenue vs Operating Profit</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">03 Margin</div>
+        <h2 class="anim d1">성장의 핵심은 ‘이익률’ 개선</h2>
+        <p class="subtitle anim d2">1Q26 전사 영업이익률은 42.8%로, 직전 분기 대비 +21.4%p 개선되었습니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:34px;align-items:center">
+          <div class="card center">
+            <div class="gauge" style="margin:0 auto">
+              <div class="gauge-bg"></div><div class="gauge-fill"></div>
+              <div class="gauge-center"><div class="num accent">42.8%</div><div class="cap">Operating Profit Margin</div></div>
+            </div>
+            <div class="pillrow" style="justify-content:center"><span class="badge blue">전분기 대비 +21.4%p</span><span class="badge">고마진 구조 확인</span></div>
+          </div>
+          <div class="card">
+            <h3>투자 해석</h3>
+            <div class="divider"></div>
+            <p class="bigquote">매출 증가보다 더 중요한 것은<br/><span class="accent">수익성의 급격한 개선</span>입니다.</p>
+            <div class="pillrow"><span class="badge">가격 상승</span><span class="badge">고부가 제품 믹스</span><span class="badge yellow">환율 효과</span></div>
+            <p class="small" style="margin-top:18px">고마진 국면이 지속될 경우 이익 추정치 상향과 밸류에이션 재평가의 근거가 됩니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Margin Inflection</span><span>OP Margin 42.8%</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">04 Segment</div>
+        <h2 class="anim d1">사업부별 실적: 어디서 돈을 벌었는가</h2>
+        <p class="subtitle anim d2">DS는 압도적 고수익 사업부, DX는 방어적 현금창출 역할입니다.</p>
+        <div class="card anim d3" style="margin-top:26px">
+          <table class="table">
+            <thead><tr><th>사업부</th><th class="right">매출</th><th class="right">영업이익</th><th class="right">영업이익률</th><th>투자 해석</th></tr></thead>
+            <tbody>
+              <tr><td><b>DS 반도체</b></td><td class="right">81.7조</td><td class="right accent">53.7조</td><td class="right"><span class="heat hot">66%</span></td><td>AI 메모리 사이클 핵심</td></tr>
+              <tr><td><b>DX 모바일/VD/가전</b></td><td class="right">52.7조</td><td class="right">3.0조</td><td class="right"><span class="heat mid">6%</span></td><td>하방 안정성·현금창출</td></tr>
+              <tr><td><b>SDC 디스플레이</b></td><td class="right">6.7조</td><td class="right">0.4조</td><td class="right"><span class="heat low">5%</span></td><td>안정성 제한적</td></tr>
+              <tr><td><b>Harman</b></td><td class="right">3.8조</td><td class="right">0.2조</td><td class="right"><span class="heat mid">6%</span></td><td>차량전자 장기 옵션</td></tr>
+            </tbody>
+          </table>
+          <p class="note">※ 부문 매출은 내부거래 제거 전 기준일 수 있어 연결 매출과 단순합이 일치하지 않을 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="footer"><span>Segment Heatmap</span><span>DS Dominance</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">05 Profit Contribution</div>
+        <h2 class="anim d1">실적의 본체는 DS</h2>
+        <p class="subtitle anim d2">전사 영업이익 57.2조원 중 DS가 53.7조원을 창출했습니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:34px;align-items:center">
+          <div class="card center">
+            <div class="donut-wrap"><div class="donut" style="--p:93.9%"><div class="inner"><div class="pct accent">93.9%</div><div class="txt">DS 이익 기여도</div></div></div></div>
+          </div>
+          <div class="card">
+            <h3>투자 아이디어의 재정의</h3>
+            <div class="divider"></div>
+            <p class="bigquote">이번 분기 삼성전자는<br/>사실상 <span class="accent">DS 투자 아이디어</span>입니다.</p>
+            <div class="grid grid-2" style="margin-top:24px">
+              <div class="card" style="box-shadow:none"><div class="name small">DS 영업이익</div><div class="value accent">53.7조</div></div>
+              <div class="card" style="box-shadow:none"><div class="name small">기타 영업이익</div><div class="value">3.5조</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>DS Contribution</span><span>53.7 / 57.2 = 93.9%</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">06 Memory Deep Dive</div>
+        <h2 class="anim d1">DS 성장 = 메모리 성장</h2>
+        <p class="subtitle anim d2">DS 매출 81.7조원 중 메모리 매출은 74.8조원으로 91.6%를 차지합니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:34px;align-items:center">
+          <div class="card center">
+            <div class="donut-wrap"><div class="donut" style="--p:91.6%"><div class="inner"><div class="pct accent">91.6%</div><div class="txt">Memory / DS Revenue</div></div></div></div>
+          </div>
+          <div class="card">
+            <h3>DS 내 매출 구성</h3>
+            <div style="margin-top:26px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:8px"><b>Memory</b><b class="accent">74.8조원</b></div>
+              <div style="height:24px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden"><div style="height:100%;width:91.6%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:999px"></div></div>
+              <div style="display:flex;justify-content:space-between;margin:22px 0 8px"><b>Other DS</b><b>6.9조원</b></div>
+              <div style="height:24px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden"><div style="height:100%;width:8.4%;background:rgba(255,255,255,.36);border-radius:999px"></div></div>
+            </div>
+            <p class="small" style="margin-top:24px">AI 서버, HBM, 고성능 DRAM/SSD 수요가 삼성전자 실적에 직접 연결되는 구조입니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Memory Revenue</span><span>74.8T KRW</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">07 Memory Momentum</div>
+        <h2 class="anim d1">메모리 매출의 기울기가 바뀌었다</h2>
+        <p class="subtitle anim d2">2025년 1분기 19.1조원에서 2026년 1분기 74.8조원으로 급증했습니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:30px;align-items:center">
+          <div class="card">
+            <div class="bar-chart" style="height:310px">
+              <div class="bar-group"><div class="bar profit" style="height:25.5%"><span class="bar-val">19.1</span></div><div class="bar-label">1Q25</div></div>
+              <div class="bar-group"><div class="bar profit" style="height:49.6%"><span class="bar-val">37.1</span></div><div class="bar-label">4Q25</div></div>
+              <div class="bar-group"><div class="bar profit" style="height:100%"><span class="bar-val">74.8</span></div><div class="bar-label">1Q26</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mega-number accent">+292%</div>
+            <h3>1Q25 대비 메모리 매출 증가</h3>
+            <div class="divider"></div>
+            <div class="mega-number" style="font-size:58px">+102%</div>
+            <h3>4Q25 대비 메모리 매출 증가</h3>
+            <p class="small" style="margin-top:18px">가격 상승, 공급 부족, 고부가 AI 메모리 제품 믹스가 결합된 결과로 해석됩니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Memory Momentum</span><span>19.1 → 37.1 → 74.8</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">08 Profit Drivers</div>
+        <h2 class="anim d1">무엇이 이익을 끌어올렸는가</h2>
+        <p class="subtitle anim d2">고부가 AI 제품, 메모리 가격 상승, 환율 효과가 동시에 작동했습니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:30px;align-items:center">
+          <div class="card">
+            <div class="waterfall">
+              <div class="wf-col"><div class="wf-bar" style="height:35%"><span class="wf-val">20.1</span></div><div class="wf-lab">4Q25<br/>OP</div></div>
+              <div class="wf-col"><div class="wf-bar add" style="height:48%"><span class="wf-val">가격</span></div><div class="wf-lab">Memory<br/>Price</div></div>
+              <div class="wf-col"><div class="wf-bar add" style="height:60%"><span class="wf-val">Mix</span></div><div class="wf-lab">AI 고부가<br/>제품</div></div>
+              <div class="wf-col"><div class="wf-bar fx" style="height:20%"><span class="wf-val">+1.8</span></div><div class="wf-lab">환율<br/>효과</div></div>
+              <div class="wf-col"><div class="wf-bar final" style="height:100%"><span class="wf-val">57.2</span></div><div class="wf-lab">1Q26<br/>OP</div></div>
+            </div>
+            <p class="note">※ 워터폴은 방향성 설명용 개념도입니다. 환율 효과 +1.8조원은 별도 표시.</p>
+          </div>
+          <div class="card">
+            <h3>3대 개선 요인</h3>
+            <div class="divider"></div>
+            <div class="list">
+              <div class="item"><span class="dot b">AI</span><div><b>AI향 고부가 제품 확대</b><p class="small">HBM4, SOCAMM2 등 고성능 메모리 제품</p></div></div>
+              <div class="item"><span class="dot g">₩</span><div><b>메모리 공급 부족과 가격 상승</b><p class="small">업황 회복이 마진 개선으로 연결</p></div></div>
+              <div class="item"><span class="dot b">FX</span><div><b>환율 효과</b><p class="small">전분기 대비 약 +1.8조원 영업이익 개선 효과</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Profit Bridge</span><span>Price + Mix + FX</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">09 Non-DS</div>
+        <h2 class="anim d1">비반도체는 성장축이 아니라 안정판</h2>
+        <p class="subtitle anim d2">DX·SDC·Harman은 실적 주역은 아니지만 포트폴리오 안정성에 기여합니다.</p>
+        <div class="grid grid-3 anim d3" style="margin-top:34px">
+          <div class="card"><div class="badge blue">DX</div><h3 style="margin-top:18px">현금창출 방어</h3><div class="mega-number" style="font-size:48px;margin-top:18px">3.0조</div><p class="small">영업이익 / 마진 6%</p></div>
+          <div class="card"><div class="badge yellow">SDC</div><h3 style="margin-top:18px">디스플레이 안정성</h3><div class="mega-number" style="font-size:48px;margin-top:18px">0.4조</div><p class="small">영업이익 / 마진 5%</p></div>
+          <div class="card"><div class="badge">Harman</div><h3 style="margin-top:18px">차량전자 옵션</h3><div class="mega-number" style="font-size:48px;margin-top:18px">0.2조</div><p class="small">영업이익 / 마진 6%</p></div>
+        </div>
+        <div class="card anim d4" style="margin-top:24px"><p class="bigquote">투자자 관점의 메인 드라이버는 여전히 <span class="accent">DS·Memory</span>입니다.</p></div>
+      </div>
+      <div class="footer"><span>Non-DS Role</span><span>Stability, not Main Driver</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">10 Future Competitiveness</div>
+        <h2 class="anim d1">실적만이 아니라 미래 경쟁력도 강화 중</h2>
+        <p class="subtitle anim d2">강한 현재 이익을 AI 메모리 경쟁력으로 재투자하는 구간입니다.</p>
+        <div class="grid grid-2 anim d3" style="margin-top:34px;align-items:center">
+          <div class="card center">
+            <div class="mega-number accent">11.3조</div>
+            <h3 style="margin-top:12px">R&D 투자</h3>
+            <div class="pillrow" style="justify-content:center"><span class="badge">YoY +26%</span><span class="badge blue">매출 대비 8.4%</span></div>
+            <p class="small" style="margin-top:20px">단기 이익을 중장기 제품 경쟁력 확보에 투입하는 구조입니다.</p>
+          </div>
+          <div class="card">
+            <h3>AI Memory Product Roadmap</h3>
+            <div class="timeline">
+              <div class="time-card"><div class="time-dot">1</div><b>HBM4</b><p class="small">AI 가속기향 고대역폭 메모리</p></div>
+              <div class="time-card"><div class="time-dot">2</div><b>SOCAMM2</b><p class="small">차세대 서버 메모리 폼팩터</p></div>
+              <div class="time-card"><div class="time-dot">3</div><b>PCIe Gen6 SSD</b><p class="small">고성능 서버 스토리지</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>R&D & Roadmap</span><span>Future AI Memory Competitiveness</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content wide">
+        <div class="label anim">11 Investment View</div>
+        <h2 class="anim d1">투자 관점: 기회와 리스크</h2>
+        <p class="subtitle anim d2">실적은 매우 강하지만, 이익 편중도와 사이클 리스크를 함께 봐야 합니다.</p>
+        <div class="matrix anim d3" style="margin-top:30px">
+          <div class="card" style="border-color:rgba(34,197,94,.28)"><div class="badge">Bull Case</div><div class="divider"></div><div class="list">
+            <div class="item"><span class="dot g">✓</span><div><b>AI 인프라 투자 지속</b><p class="small">서버·데이터센터 중심 수요 확대</p></div></div>
+            <div class="item"><span class="dot g">✓</span><div><b>메모리 가격 상승</b><p class="small">공급 부족과 고부가 제품 믹스</p></div></div>
+            <div class="item"><span class="dot g">✓</span><div><b>HBM4 확장</b><p class="small">AI 메모리 경쟁력 개선 여부</p></div></div>
+            <div class="item"><span class="dot g">✓</span><div><b>이익 추정치 상향</b><p class="small">고마진 지속 시 밸류에이션 재평가</p></div></div>
+          </div></div>
+          <div class="card" style="border-color:rgba(239,68,68,.28)"><div class="badge red">Risk Case</div><div class="divider"></div><div class="list">
+            <div class="item"><span class="dot r">!</span><div><b>메모리 가격 피크아웃</b><p class="small">마진 하락 시 이익 민감도 큼</p></div></div>
+            <div class="item"><span class="dot r">!</span><div><b>DS 이익 편중</b><p class="small">전사 이익의 93.9%가 DS에서 발생</p></div></div>
+            <div class="item"><span class="dot r">!</span><div><b>파운드리 경쟁력</b><p class="small">장기 성장 옵션이나 단기 기여 제한</p></div></div>
+            <div class="item"><span class="dot r">!</span><div><b>비반도체 성장성 제한</b><p class="small">DX·SDC·Harman은 보조적 역할</p></div></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Opportunity vs Risk</span><span>Key Question: Sustainability</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="content center">
+        <div class="label anim">12 Conclusion</div>
+        <h2 class="hero-title anim d1">삼성전자, 지금 무엇으로 봐야 하는가</h2>
+        <p class="subtitle anim d2" style="margin-top:16px">현재의 삼성전자는 종합전자보다 <b style="color:#fff">AI 메모리 사이클 핵심 수혜주</b>로 해석하는 것이 타당합니다.</p>
+        <div class="grid grid-3 anim d3" style="margin-top:42px;text-align:left">
+          <div class="card"><div class="badge">1</div><h3 style="margin-top:16px">Strong Earnings</h3><p class="small" style="margin-top:12px">매출 133.9조원, 영업이익 57.2조원으로 실적 서프라이즈 확인</p></div>
+          <div class="card"><div class="badge blue">2</div><h3 style="margin-top:16px">AI Memory</h3><p class="small" style="margin-top:12px">DS와 메모리 중심 이익 구조가 명확해진 분기</p></div>
+          <div class="card"><div class="badge yellow">3</div><h3 style="margin-top:16px">Sustainability Check</h3><p class="small" style="margin-top:12px">핵심은 66% DS 마진과 메모리 가격 상승세의 지속 여부</p></div>
+        </div>
+        <div class="hero-box anim d4" style="margin-top:42px">최종 메시지: 매수 논리 우세, 그러나 핵심은 지속성 검증</div>
+      </div>
+      <div class="footer"><span>Final Investment Message</span><span>Not financial advice</span></div>
+    </section>
+
+  </main>
+  <script>
+    const slides=[...document.querySelectorAll('.slide')];
+    const total=slides.length;let current=0;
+    const counter=document.getElementById('counter');const progress=document.getElementById('progress');
+    function update(){slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.classList.toggle('prev',i<current)});counter.textContent=(current+1)+' / '+total;progress.style.width=((current+1)/total*100)+'%'}
+    function go(n){if(n<0||n>=total)return;current=n;update()}
+    function nextSlide(){go(Math.min(total-1,current+1))}function prevSlide(){go(Math.max(0,current-1))}
+    document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();nextSlide()} if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prevSlide()}});
+    let sx=null;document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?nextSlide():prevSlide()}sx=null});
+    document.getElementById('deck').addEventListener('click',e=>{if(e.target.closest('.nav')||e.target.closest('.menu'))return;if(e.clientX<window.innerWidth/3)prevSlide();else nextSlide()});
+    async function downloadPNG(){
+      // Lightweight fallback: print dialog if html-to-image is not bundled. Kept self-contained without external dependency.
+      alert('PNG 저장은 브라우저 보안상 캡처 도구 사용을 권장합니다. PDF 저장은 상단의 PDF/인쇄 버튼을 사용해 주세요.');
+    }
+    update();
+  </script>
+</body>
+</html>
